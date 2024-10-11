@@ -1,0 +1,1 @@
+awk -F, 'NR >= 2 && $3 == 2 && $13 ~ /S/ {print $0}' titanic.csv | sed -e 's/,male,/,M,/' -e 's/,female,/,F,/'| awk -F, 'BEGIN {count = 0; sum_age = 0} {if ($7 != "") {count+=1; sum_age+=$7; print $0}} END {if (count > 0) print "Average age: " sum_age/count; else print "No valid data"}'
